@@ -1,0 +1,98 @@
+apiVersion: v1alpha1
+kind: AgentConfig
+metadata:
+  name: ocp-agent-config
+rendezvousIP: <master-0-ip>
+hosts:
+  # ----------------------------------------------------------------
+  # MASTER 1
+  # ----------------------------------------------------------------
+  - hostname: <master-0-hostname>
+    role: master
+    rootDeviceHints:
+      serialNumber: "<master-0-OS-SSD-serial-number>"
+    interfaces:
+      - name: <master-0-NIC-interface-name>
+        macAddress: "<master-0-NIC-mac-address>"
+    networkConfig:
+      interfaces:
+        - name: <master-0-NIC-interface-name>
+          type: ethernet
+          state: up
+          ipv4:
+            enabled: true
+            address:
+              - ip: <master-0-ip>
+                prefix-length: 24
+            dhcp: false
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: <master-0-gateway-ip>
+            next-hop-interface: <master-0-NIC-interface-name>
+      dns-resolver:
+        config:
+          server:
+            - <dns-server-1>
+
+  # ----------------------------------------------------------------
+  # MASTER 2
+  # ----------------------------------------------------------------
+  - hostname: <master-1-hostname>
+    role: master
+    rootDeviceHints:
+      serialNumber: "<master-1-OS-SSD-serial-number>"
+    interfaces:
+      - name: <master-1-NIC-interface-name>
+        macAddress: "<master-1-NIC-mac-address>"
+    networkConfig:
+      interfaces:
+        - name: <master-1-NIC-interface-name>
+          type: ethernet
+          state: up
+          ipv4:
+            enabled: true
+            address:
+              - ip: <master-1-ip>
+                prefix-length: 24
+            dhcp: false
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: <master-1-gateway-ip>
+            next-hop-interface: <master-1-NIC-interface-name>
+      dns-resolver:
+        config:
+          server:
+            - <dns-server-1>
+
+  # ----------------------------------------------------------------
+  # MASTER 3
+  # ----------------------------------------------------------------
+  - hostname: <master-2-hostname>
+    role: master
+    rootDeviceHints:
+      serialNumber: "<master-2-OS-SSD-serial-number>"
+    interfaces:
+      - name: <master-2-NIC-interface-name>
+        macAddress: "<master-2-NIC-mac-address>"
+    networkConfig:
+      interfaces:
+        - name: <master-2-NIC-interface-name>
+          type: ethernet
+          state: up
+          ipv4:
+            enabled: true
+            address:
+              - ip: <master-2-ip>
+                prefix-length: 24
+            dhcp: false
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: <master-2-gateway-ip>
+            next-hop-interface: <master-2-NIC-interface-name>
+      dns-resolver:
+        config:
+          server:
+            - <dns-server-1>

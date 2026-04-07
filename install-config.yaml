@@ -1,0 +1,27 @@
+apiVersion: v1
+baseDomain: <Domain> # <--- CHANGE THIS to your actual domain (e.g., lab.local)
+compute:
+  - name: worker
+    replicas: 0
+controlPlane:
+  name: master
+  replicas: 3
+metadata:
+  name: <Cluster-Name> # <--- Cluster Name
+networking:
+  clusterNetwork:
+    - cidr: 10.128.0.0/14 # <--- change as per needed (Internal IP for Openshift)
+      hostPrefix: 23
+  machineNetwork:
+    - cidr: 10.28.2.0/24 # <--- change as per needed (Internal IP for Openshift)
+  networkType: OVNKubernetes
+  serviceNetwork:
+    - 172.30.0.0/16 # <--- change as per needed (Internal IP for Openshift)
+platform:
+  baremetal:
+    apiVIPs:
+      - <API-VIP>
+    ingressVIPs:
+      - <Ingress-VIP>
+pullSecret: <Pull Secret>
+sshKey: <SSH-KEY of the jump host>
